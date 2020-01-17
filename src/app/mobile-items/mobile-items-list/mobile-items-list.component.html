@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="">ShowMobile</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-5" style="margin-left: 5em;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">MobileName</th>
+                    <th scope="col">MobilePrice</th>
+                   <th scope="col">Accessories</th>
+                   <th scope="col"></th>
+                   <!-- <th scope="col">AccessoryPrice</th> -->
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let mi of mobileitem; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{mi.mobileName}}</td> 
+                        <td>{{ mi.mobilePrice }}</td>
+                        <td><button type='button' class='btn btn-primary btn-sm' (click)="changes(mi.mobileItemsId)">View Accessories </button></td>
+                       <td> <button type="button" class="btn btn-light" (click)="changee()">Edit</button></td>
+                        <!-- <td>{{mi.accessoryItems[0].accessoryName}}</td>
+                        <td>{{mi.accessoryItems[0].accessoryPrice}}</td> -->
+                        
+                    </tr>
+                </tbody>
+          </table>
+
+          
+        </div>
+    </div>
+</div>

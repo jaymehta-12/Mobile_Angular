@@ -1,0 +1,19 @@
+<div class="jumbotron">
+    <h1 class="display-4 text center">Mobile Items Page</h1>
+
+
+
+<nav class='navbar navbar-expand navbar-light bg-light'>
+    <ul class='nav navbar-nav'>
+    <!-- <li><a class='nav-link' [routerLink]="['/mobile-items',{ outlets: {'warranty': ['warranty']  }  }]"> Warranty Of Mobile</a></li>
+    <li><a class='nav-link' [routerLink]="['/mobile-items',{ outlets: {'companies': ['companies']  }  }]"> Companies list</a></li> -->
+    <li><a class='btn btn-outline-dark' routerLink="/mobile-items/warranty"> Warranty Of Mobile</a></li>
+    <li><a class='btn btn-outline-dark' routerLink="/mobile-items/companies"> Companies List</a></li>
+
+    </ul>
+</nav>
+
+<router-outlet></router-outlet>
+ <!-- <router-outlet name="warranty"></router-outlet>
+ <router-outlet name="companies"></router-outlet> -->
+</div>

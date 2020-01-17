@@ -1,0 +1,145 @@
+<div class="card">
+  <div class="card-header">
+    Add Mobile Items
+  </div>
+
+  <div class="card-body">
+    <form novalidate (ngSubmit)="save()" [formGroup]="mobileaddForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="mobileNameId">Mobile Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="mobileNameId" type="text" appBlockCopyPaste  (keypress)="numberOnly($event)"placeholder="Mobile Name (required)" 
+           formControlName="mobileName"
+            [ngClass]="{'is-invalid': (mobileaddForm.get('mobileName').touched || mobileaddForm.get('mobileName').dirty) && !mobileaddForm.get('mobileName').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="mobileaddForm.get('mobileName').errors?.required">
+              Please enter your Mobile Name.
+            </span>
+            
+            <span *ngIf="mobileaddForm.get('mobileName').errors?.minlength">
+              The Mobile Name must be longer than 3 characters.
+            </span>
+          </span>
+          
+        </div>
+        
+      </div>
+      
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="mobilePriceId">Mobile Price </label>
+        <div class="col-md-8">
+          <input class="form-control" id="mobilePriceId" type="tel" placeholder="Mobile Price (required)" required
+            minlength="3" formControlName="mobilePrice"
+            [ngClass]="{'is-invalid': (mobileaddForm.get('mobilePrice').touched || mobileaddForm.get('mobilePrice').dirty) && !mobileaddForm.get('mobilePrice').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="mobileaddForm.get('mobilePrice').errors?.required">
+              Please enter Mobile Price.
+            </span>
+            <span *ngIf="mobileaddForm.get('mobilePrice').errors?.maxlength">
+              Please enter valid mobile price
+            </span>
+          </span>
+        </div>
+      </div>
+      <!-- <div class="col-md-3">
+        <select class="form-control"
+                id=""
+                formControlName="">
+          <option value=""
+                  disabled
+                  selected
+                  hidden>Select companies...</option>
+          <option value="AL">OP</option>
+          <option value="AK">Iphone</option>
+       
+         
+        </select>
+      </div> -->
+     
+      
+      
+<hr>
+
+      <!-- <div formArrayName="buttons">
+          <div class="form-group row mb-2"
+               *ngFor="let tag of buttons.controls; let i=index">
+            <label class="col-md-2 col-form-label"
+                   for="abc">Button</label>
+  
+            <div class="col-md-8">
+              <input class="form-control"
+                     [id]="i"
+                     type="text"
+                     placeholder="Button"
+                     [formControlName]="i" />
+            </div>
+            <button class="col-md-1 btn btn-outline-warning btn-sm"
+                    type="button"
+                  
+                    (click)="deleteButton(i)">Delete Button
+            </button>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-2 mb-2">
+            <button class="btn btn-outline-secondary btn-sm"
+                    type="button"
+                    title="Add a button"
+                    (click)="addButton()">Add Button
+            </button>
+          </div>
+        </div> -->
+       
+        
+        <div class="form-group row mb-2">
+          <div class="col-md-4">
+            <button class="btn btn-outline-primary" type="button" (click)="addAcc()">
+              Add Accessory
+            </button>
+          </div>
+        </div>
+            <!-- <div class="form-group row mb-3">
+              <label class="col-md-2 col-form-label" attr.for="{{'accessoryN1Id' + i}}">Accessory Name</label>
+              <div class="col-md-4">
+                <input class="form-control" id="{{ 'accessoryN1Id' + i }}" type="text" placeholder="Accessory Name (required)"
+                  formControlName="accessoryName">
+              </div>
+        
+              <div class="form-group row mb-3">
+                <label class="col-md-3 col-form-label" attr.for="{{'accessoryP1Id' + i}}">Price</label>
+                <div class="col-md-8">
+                  <input class="form-control" id="{{'accessoryP1Id' + i}}" type="text" placeholder="Accessory Price"
+                    formControlName="accessoryPrice">
+                </div>
+              </div>
+            </div> -->
+            <div formArrayName="accessories" *ngFor="let acc of accessories.controls; let i=index">
+
+            <app-accessory-items [accform]="acc" ></app-accessory-items>
+            <button class="col-md-1 btn btn-outline-warning btn-sm" type="button" (click)="deleteButton(i)">Delete Button
+            </button>
+          </div>
+           
+
+       
+          <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+              <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                [title]="mobileaddForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                [disabled]="!mobileaddForm.valid">
+        
+                Save
+              </button>
+            </div>
+          </div>
+
+        
+
+    </form>
+  </div>
+</div>
+
+<br>Value: {{ mobileaddForm.value | json }}
