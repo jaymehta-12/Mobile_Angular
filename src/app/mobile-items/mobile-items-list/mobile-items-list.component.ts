@@ -22,8 +22,6 @@ export class MobileItemsListComponent implements OnInit {
     this.mobileservice.getMobileItems().subscribe(mi => {
       this.mobileitem = mi;
       console.log(mi);
-    
-    
     });
   }
   // getAccItemsbyID():void{
