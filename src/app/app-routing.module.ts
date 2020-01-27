@@ -6,6 +6,7 @@ import { MobileItemsListComponent } from './mobile-items/mobile-items-list/mobil
 import { WarrantyComponent } from './mobile-items/warranty/warranty.component';
 import { CompaniesComponent } from './mobile-items/companies/companies.component';
 import { AccessoryItemsListComponent } from './mobile-items/accessory-items/accessory-items-list/accessory-items-list.component';
+import { MobileEditComponent } from './mobile-items/mobile-edit/mobile-edit.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     ]},
     {path:'add-mobile',component:AddMobileComponent},
     {path:'list-mobile',component:MobileItemsListComponent},
-    {path: 'acc-list/:id', component:AccessoryItemsListComponent}
+    {path: 'acc-list/:id', component:AccessoryItemsListComponent},
+    {path:'mobile-edit',component:MobileEditComponent}
     // {path:'warranty',component:WarrantyComponent,outlet:'warranty'},
     // {path:'companies-mobile',component:CompaniesComponent}
 

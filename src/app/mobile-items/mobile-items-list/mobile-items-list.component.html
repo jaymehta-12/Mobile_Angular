@@ -10,7 +10,9 @@
                     <th scope="col">No.</th>
                     <th scope="col">MobileName</th>
                     <th scope="col">MobilePrice</th>
-                   <th scope="col">Accessories</th>
+                   <th scope="col" >Available?</th>
+                   <th scope="col">Action</th>
+
                    <th scope="col"></th>
                    <!-- <th scope="col">AccessoryPrice</th> -->
                 </tr>
@@ -20,8 +22,27 @@
                         <td>{{i+1}}</td>
                         <td>{{mi.mobileName}}</td> 
                         <td>{{ mi.mobilePrice }}</td>
-                        <td><button type='button' class='btn btn-primary btn-sm' (click)="changes(mi.mobileItemsId)">View Accessories </button></td>
-                       <td> <button type="button" class="btn btn-light" (click)="changee()">Edit</button></td>
+                        <td  >
+                             <b>{{mi.accessoryItems.length > 0 ? "Yes":"No"}}</b>
+                            
+                            <!-- <button type='button' class='btn btn-primary btn-sm' (click)="changess(mi.accessoryItemsId)">View Accessories </button> -->
+
+                             <!--<button type='button' class='btn btn-primary btn-sm' (click)="changes(mi.mobileItemsId)">View Accessories </button>-->
+                            
+                            
+                            </td> 
+                        <td> 
+                            <div class="col-md-3">
+                            <select class="form-control" (change)="changes($event.target.value, mi.mobileItemsId)">
+                                <option value="Action" disabled selected>Action</option>
+                                <option  value="view">View</option>>
+                                <option value="add">Add</option>
+                                <option value="del">Delete</option>
+                            </select>
+                        </div>
+                           
+                        </td>
+                    
                         <!-- <td>{{mi.accessoryItems[0].accessoryName}}</td>
                         <td>{{mi.accessoryItems[0].accessoryPrice}}</td> -->
                         
@@ -29,7 +50,7 @@
                 </tbody>
           </table>
 
-          
+        
         </div>
     </div>
 </div>

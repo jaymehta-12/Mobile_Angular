@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MobileItemsService } from '../mobile-items.service';
 import { MobileItems } from '../mobile-model/mobile-items.model';
 import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-mobile-items-list',
@@ -21,6 +23,7 @@ export class MobileItemsListComponent implements OnInit {
   getMobileItems(): void{
     this.mobileservice.getMobileItems().subscribe(mi => {
       this.mobileitem = mi;
+      
       console.log(mi);
     });
   }
@@ -35,11 +38,30 @@ export class MobileItemsListComponent implements OnInit {
 
   // }
 
-  changes(id:number): void{
-    this.router.navigate(['acc-list',id]);
+  // changes(id: number): void {
+  //   debugger;
+  //   this.router.navigate(['acc-list', id]);
+  // }
+
+  changes(value: any, id: number) {
+
+    if (!isNullOrUndefined(id) && value === 'view') {
+      this.router.navigate(['acc-list', id]);
+    } 
+    else if(value==='add'){
+      this.router.navigate(['add-mobile']);
+    }
+    else{
+      if(confirm("Are you sure to delete "+name)) {
+        console.log("Implement delete functionality here");
+      }
+    }
   }
+
   changee():void{
-    this.router.navigate([''])
+    this.router.navigate(['mobile-edit']);
   }
+
+  
 
 }

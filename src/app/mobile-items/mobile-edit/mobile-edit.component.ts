@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-mobile-edit',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MobileEditComponent implements OnInit {
 
+  
+
+
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
