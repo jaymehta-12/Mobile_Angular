@@ -28,7 +28,9 @@ const routes: Routes = [
     {path:'add-mobile',component:AddMobileComponent},
     {path:'list-mobile',component:MobileItemsListComponent},
     {path: 'acc-list/:id', component:AccessoryItemsListComponent},
-    {path:'mobile-edit',component:MobileEditComponent}
+    {path:'add-mobile/:id/edit',component:AddMobileComponent},
+    {path:'add-mobile/:id/delete',component:AddMobileComponent}
+
     // {path:'warranty',component:WarrantyComponent,outlet:'warranty'},
     // {path:'companies-mobile',component:CompaniesComponent}
 

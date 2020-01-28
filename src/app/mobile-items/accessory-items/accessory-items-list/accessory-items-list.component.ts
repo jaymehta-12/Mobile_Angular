@@ -17,7 +17,7 @@ export class AccessoryItemsListComponent implements OnInit {
     let id = +this.route.snapshot.paramMap.get('id');
     this.getAccItemsbyID(id);
   }
-  getAccItemsbyID(id):void{
+  getAccItemsbyID(id): void{
 
     this.mobileservice.getAccItemsbyID(id).subscribe(mi => {
       this.accitem = mi;
@@ -27,4 +27,11 @@ export class AccessoryItemsListComponent implements OnInit {
     });
 
   }
+
+  // display(mobile: MobileItems):void{
+  //   this.accitem=MobileItems;
+  //   if(this.accitem.mobileItemsId === 0){
+      
+  //   }
+  // }
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';  
+import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule , routingComponents} from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +35,7 @@ import { MobileEditComponent } from './mobile-items/mobile-edit/mobile-edit.comp
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],

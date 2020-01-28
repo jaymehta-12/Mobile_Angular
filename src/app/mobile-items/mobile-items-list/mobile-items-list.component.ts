@@ -51,17 +51,17 @@ export class MobileItemsListComponent implements OnInit {
     else if(value==='add'){
       this.router.navigate(['add-mobile']);
     }
+    else if(value==='edit'){
+      this.router.navigate(['add-mobile',id,'edit']);
+    }
     else{
-      if(confirm("Are you sure to delete "+name)) {
-        console.log("Implement delete functionality here");
+      this.router.navigate(['add-mobile',id,'delete']);
       }
     }
   }
 
-  changee():void{
-    this.router.navigate(['mobile-edit']);
-  }
+
 
   
 
-}
+
