@@ -2,56 +2,87 @@
     <div class="row">
         <h1 class="">ShowMobile</h1>
     </div>
+    <!-- <input class="form-control" type="text" name="search" placeholder="search"> -->
+    <div class="container-fluid">
+    <form (keyup)="getMobileItemsbySearch(searchForm.value)" [formGroup]="searchForm">
+        <div class="row">
+            <div class="input-group mb-3 col-md-4">
+                <input class="form-control" id="" type="text"  placeholder="Search"
+                    formControlName="searchstring">
+                    <span class="invalid-feedback">
+                        <span *ngIf = "searchstring == null;notfoundmsg" >
+                            nothing
+                        </span>
+
+                    </span>
+            </div>
+            
+        </div>
+    </form>
+    <!-- <div *ngIf = "notfoundmsg !== null"  class="alert alert-danger col-md-3">
+        No results found!
+    </div> -->
+</div>
+    <div class="col-md-3">
+        <select class="form-control" (change)="getMobileItemsbySort($event.target.value)">
+            <option value="Sort" disabled selected>Sort</option>
+            <option value="name_desc">Name(H to L)</option>>
+            <option value="price_desc">Price(H to L)</option>
+        </select>
+    </div>
+
+    
     <div class="row">
+
         <div class="col-lg-5" style="margin-left: 5em;">
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">MobileName</th>
-                    <th scope="col">MobilePrice</th>
-                   <th scope="col" >Available?</th>
-                   <th scope="col">Action</th>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">MobileName</th>
+                        <th scope="col">MobilePrice</th>
+                        <th scope="col">Available?</th>
+                        <th scope="col">Action</th>
 
-                   <th scope="col"></th>
-                   <!-- <th scope="col">AccessoryPrice</th> -->
-                </tr>
+                        <th scope="col"></th>
+                        <!-- <th scope="col">AccessoryPrice</th> -->
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let mi of mobileitem; let i = index">
+                    <tr *ngFor="let mi of mobileitem ; let i = index">
                         <td>{{i+1}}</td>
-                        <td>{{mi.mobileName}}</td> 
+                        <td>{{mi.mobileName}}</td>
                         <td>{{ mi.mobilePrice }}</td>
-                        <td  >
-                             <b>{{mi.accessoryItems.length > 0 ? "Yes":"No"}}</b>
-                            
+                        <td>
+                            <!-- <b>{{mi.accessoryItems.length > 0 ? "Yes":"No"}}</b> -->
+
                             <!-- <button type='button' class='btn btn-primary btn-sm' (click)="changess(mi.accessoryItemsId)">View Accessories </button> -->
 
-                             <!--<button type='button' class='btn btn-primary btn-sm' (click)="changes(mi.mobileItemsId)">View Accessories </button>-->
-                            
-                            
-                            </td> 
-                        <td> 
-                            <div class="col-md-3">
-                            <select class="form-control" (change)="changes($event.target.value, mi.mobileItemsId)">
-                                <option value="Action" disabled selected>Action</option>
-                                <option  value="view">View Accessory</option>>
-                                <option value="add">Add</option>
-                                <option value="edit">Edit</option>
-                                <option value="del">Delete</option>
-                            </select>
-                        </div>
-                           
+                            <!--<button type='button' class='btn btn-primary btn-sm' (click)="changes(mi.mobileItemsId)">View Accessories </button>-->
+
+
                         </td>
-                    
+                        <td>
+                            <div class="col-md-3">
+                                <select class="form-control" (change)="changes($event.target.value, mi.mobileItemsId)">
+                                    <option value="Action" disabled selected>Action</option>
+                                    <option value="view">View Accessory</option>>
+                                    <option value="add">Add</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="del">Delete</option>
+                                </select>
+                            </div>
+
+                        </td>
+
                         <!-- <td>{{mi.accessoryItems[0].accessoryName}}</td>
                         <td>{{mi.accessoryItems[0].accessoryPrice}}</td> -->
-                        
+
                     </tr>
                 </tbody>
-          </table>
+            </table>
 
-        
+
         </div>
     </div>
 </div>

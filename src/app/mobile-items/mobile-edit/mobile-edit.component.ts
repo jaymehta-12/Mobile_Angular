@@ -25,26 +25,7 @@ export class MobileEditComponent implements OnInit {
 
   }
 
-  getMobileItemsbyId(id: number): void {
-    this.mobileservice.getMobileItemsbyId(id)
-      .subscribe({
-        next: (mobile: MobileItems) => this.display(mobile),
-      });
-  }
 
-  display(mobile:MobileItems):void{
-    this.mobile=mobile;
-    if (this.mobile.mobileItemsId === 0) {
-      this.pageTitle = 'Add Product';
-    } else {
-      this.pageTitle = `Edit Product: ${this.mobile.mobileName}`;
-    }
-    this.mobileaddForm.patchValue({
-      mobileName: this.mobile.mobileName,
-      mobilePrice: this.mobile.mobilePrice
-    });
-    // this.mobileaddForm.setControl('tags', this.fb.array(this.mobile.tags || []));
-  }
 
 
 }

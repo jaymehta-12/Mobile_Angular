@@ -4,6 +4,7 @@ import { MobileItems } from '../mobile-model/mobile-items.model';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { isNullOrUndefined } from 'util';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-mobile-items-list',
@@ -13,17 +14,25 @@ import { isNullOrUndefined } from 'util';
 export class MobileItemsListComponent implements OnInit {
   mobileitem : MobileItems[];
   accitem: MobileItems[];
+  searchForm: FormGroup;
+  notfoundmsg: string=null;
+  allitems: MobileItems[];
 
-  constructor(private mobileservice:MobileItemsService,private router: Router) { }
+  constructor(private fm: FormBuilder,private mobileservice:MobileItemsService,private router: Router) { }
 
   ngOnInit() {
     this.getMobileItems();
+    this.searchForm = this.fm.group({
+      searchstring: ['']
+    })
+    // this.getMobileItemsbySearch();
+
   }
 
   getMobileItems(): void{
     this.mobileservice.getMobileItems().subscribe(mi => {
       this.mobileitem = mi;
-      
+      this.allitems=mi;
       console.log(mi);
     });
   }
@@ -58,6 +67,35 @@ export class MobileItemsListComponent implements OnInit {
       this.router.navigate(['add-mobile',id,'delete']);
       }
     }
+    getMobileItemsbySearch(search: string): void{
+      if(search !== null){
+      this.mobileservice.getMobileItemsbySearch(this.searchForm.controls.searchstring.value).subscribe({
+        next: mobile => {
+          this.mobileitem = mobile
+          
+          
+        },
+        error: err => this.notfoundmsg = err
+      });
+    }
+      else{
+        this.notfoundmsg = null;
+
+      }
+    }
+    getMobileItemsbySort(value:any){
+      if(value!==null)
+      {
+
+       
+      this.mobileservice.getMobileItemsbySort(value).subscribe(mi => {
+        this.mobileitem = mi;
+        console.log(mi);
+      });
+
+
+    }
+  }
   }
 
 
