@@ -9,19 +9,16 @@
             <div class="input-group mb-3 col-md-4">
                 <input class="form-control" id="" type="text"  placeholder="Search"
                     formControlName="searchstring">
-                    <span class="invalid-feedback">
-                        <span *ngIf = "searchstring == null;notfoundmsg" >
-                            nothing
-                        </span>
-
-                    </span>
+                   
+                        
+                  
             </div>
             
         </div>
     </form>
-    <!-- <div *ngIf = "notfoundmsg !== null"  class="alert alert-danger col-md-3">
+      <div *ngIf = "!mobileitem || mobileitem.length === 0" >
         No results found!
-    </div> -->
+    </div>  
 </div>
     <div class="col-md-3">
         <select class="form-control" (change)="getMobileItemsbySort($event.target.value)">

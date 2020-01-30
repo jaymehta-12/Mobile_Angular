@@ -31,16 +31,23 @@ export class MobileItemsService {
   }
 
   getMobileItemsbySearch(searchstring: string): Observable<MobileItems[]> {
+    if(searchstring===null){
+      const newurl = `${this.rootURL}/mobileitem/search${searchstring}`;
+      return this.httpClient.get<MobileItems[]>(newurl);
+
+    } else{
     const newurl = `${this.rootURL}/mobileitem/search?searchstring=${searchstring}`;
-    return this.httpClient.get<MobileItems[]>(newurl)
+    return this.httpClient.get<MobileItems[]>(newurl);
+    }
   }
 
   getMobileItemsbySort(sortstring: any): Observable<MobileItems[]>{
+
     const newurl = `${this.rootURL}/mobileitem/sort?sortorder=${sortstring}`;
     return this.httpClient.get<MobileItems[]>(newurl)
-
-
   }
+
+  
 
 
   // getMobileItemsbySearch(searchstring:string,mobile:MobileItems):Observable<MobileItems>{
@@ -90,6 +97,10 @@ export class MobileItemsService {
       mobilePrice: null
     };
   }
+
+  // private refresh(){
+  //   return of(this.getMobileItems());
+  // }
 
 
 

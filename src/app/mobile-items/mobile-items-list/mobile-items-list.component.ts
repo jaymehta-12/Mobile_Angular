@@ -3,6 +3,8 @@ import { MobileItemsService } from '../mobile-items.service';
 import { MobileItems } from '../mobile-model/mobile-items.model';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { Observable , of} from 'rxjs';
+
 import { isNullOrUndefined } from 'util';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, FormArray } from '@angular/forms';
 
@@ -12,13 +14,13 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, FormA
   styles: []
 })
 export class MobileItemsListComponent implements OnInit {
-  mobileitem : MobileItems[];
+  mobileitem: MobileItems[];
   accitem: MobileItems[];
   searchForm: FormGroup;
-  notfoundmsg: string=null;
+  notfoundmsg: string = null;
   allitems: MobileItems[];
 
-  constructor(private fm: FormBuilder,private mobileservice:MobileItemsService,private router: Router) { }
+  constructor(private fm: FormBuilder, private mobileservice: MobileItemsService, private router: Router) { }
 
   ngOnInit() {
     this.getMobileItems();
@@ -29,10 +31,10 @@ export class MobileItemsListComponent implements OnInit {
 
   }
 
-  getMobileItems(): void{
+  getMobileItems(): void {
     this.mobileservice.getMobileItems().subscribe(mi => {
       this.mobileitem = mi;
-      this.allitems=mi;
+      this.allitems = mi;
       console.log(mi);
     });
   }
@@ -41,8 +43,8 @@ export class MobileItemsListComponent implements OnInit {
   //   this.mobileservice.getAccItemsbyID().subscribe(mi => {
   //     this.accitem = mi;
   //     console.log(mi);
-    
-    
+
+
   //   });
 
   // }
@@ -56,50 +58,53 @@ export class MobileItemsListComponent implements OnInit {
 
     if (!isNullOrUndefined(id) && value === 'view') {
       this.router.navigate(['acc-list', id]);
-    } 
-    else if(value==='add'){
+    }
+    else if (value === 'add') {
       this.router.navigate(['add-mobile']);
     }
-    else if(value==='edit'){
-      this.router.navigate(['add-mobile',id,'edit']);
+    else if (value === 'edit') {
+      this.router.navigate(['add-mobile', id, 'edit']);
     }
-    else{
-      this.router.navigate(['add-mobile',id,'delete']);
-      }
+    else {
+      this.router.navigate(['add-mobile', id, 'delete']);
     }
-    getMobileItemsbySearch(search: string): void{
-      if(search !== null){
+  }
+  getMobileItemsbySearch(search: string) {
+    if (search !== null) {
+      console.log(search);
       this.mobileservice.getMobileItemsbySearch(this.searchForm.controls.searchstring.value).subscribe({
         next: mobile => {
-          this.mobileitem = mobile
-          
-          
+          this.mobileitem = mobile;
+
         },
-        error: err => this.notfoundmsg = err
+
       });
-    }
-      else{
-        this.notfoundmsg = null;
 
-      }
-    }
-    getMobileItemsbySort(value:any){
-      if(value!==null)
-      {
+    } else  {
 
-       
+
+    }
+
+  }
+  getMobileItemsbySort(value: any) {
+    if (value !== null) {
+
+
       this.mobileservice.getMobileItemsbySort(value).subscribe(mi => {
         this.mobileitem = mi;
         console.log(mi);
       });
 
 
+    } else{
+
+
     }
   }
-  }
+}
 
 
 
-  
+
 
 
