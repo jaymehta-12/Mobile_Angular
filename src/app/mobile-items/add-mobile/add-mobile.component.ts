@@ -5,8 +5,9 @@ import { MobileItemsService } from '../mobile-items.service';
 import { Router } from '@angular/router';
 
 import { Directive, HostListener } from '@angular/core';
-import { Route , ActivatedRoute} from '@angular/router';
+import { Route, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { isNullOrUndefined } from 'util';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class AddMobileComponent implements OnInit {
   errorMessage: string;
   pageTitle = 'Item Edit';
   private sub: Subscription;
+  file: any;
 
   get accessoryItems(): FormArray {
     return this.mobileaddForm.get('accessoryItems') as FormArray;
@@ -44,8 +46,12 @@ export class AddMobileComponent implements OnInit {
 
     this.sub = this.route.paramMap.subscribe(
       params => {
+
         const id = +params.get('id');
-        this.getMobileItemsbyId(id);
+
+        if (id >= 1) {
+          this.getMobileItemsbyId(id);
+        }
       }
     );
   }
@@ -105,6 +111,7 @@ export class AddMobileComponent implements OnInit {
     } else {
       this.pageTitle = `Edit Product: ${this.mobile.mobileName}`;
     }
+
     this.mobileaddForm.patchValue({
       mobileName: this.mobile.mobileName,
       mobilePrice: this.mobile.mobilePrice
@@ -129,25 +136,28 @@ export class AddMobileComponent implements OnInit {
   deleteMobile(): void {
 
     if (this.mobile.mobileItemsId === 0) {
-        this.onSave();
+      this.onSave();
     } else {
-    if (confirm(`Really you wanna delete this item: ${this.mobile.mobileName}?`)) {
-      this.mobileservice.deleteMobile(this.mobile.mobileItemsId).subscribe({
-        next: () => this.onSave()
-      });
+      if (confirm(`Really you wanna delete this item: ${this.mobile.mobileName}?`)) {
+        this.mobileservice.deleteMobile(this.mobile.mobileItemsId).subscribe({
+          next: () => this.onSave()
+        });
+      }
     }
-  }
 
   }
   onSave(): void {
     this.router.navigate(['/list-mobile']);
   }
 
-   save() {
+  save() {
+
+    this.mobileaddForm.value.Image = this.file;
+    // console.log(this.mobileaddForm.value.imageup);
     if (this.mobileaddForm.valid) {
-      const m = { ...this.mobile, ...this.mobileaddForm.value};
+      const m = { ...this.mobile, ...this.mobileaddForm.value };
       if (m.mobileItemsId === 0) {
-      this.mobileservice.save(this.mobileaddForm.value).subscribe();
+        this.mobileservice.save(this.mobileaddForm.value).subscribe();
       } else {
         const id = +this.route.snapshot.paramMap.get('id');
         this.mobileservice.update(id, m).subscribe();
@@ -156,4 +166,22 @@ export class AddMobileComponent implements OnInit {
       this.errorMessage = 'Please correct the validation errors.';
     }
   }
+
+  fileUpload(event: any) {
+    if (event.target.files[0]) {
+      this.file = event.target.files[0];
+      const fileReader = new FileReader();
+      fileReader.onload = this.fileLoad.bind(this);
+      fileReader.readAsBinaryString(this.file);
+      // console.log(this.file);
+    }
+  }
+
+  fileLoad(Efile) {
+    const binaryString = Efile.target.result;
+    this.file = btoa(binaryString);
+    // console.log(btoa(binaryString));
+  }
+
+
 }

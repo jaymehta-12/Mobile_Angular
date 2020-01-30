@@ -73,6 +73,8 @@ export class MobileItemsListComponent implements OnInit {
 
       this.mobileservice.getMobileItemsbySort(value).subscribe(mi => {
         this.mobileitem = mi;
+
+        console.log(this.mobileitem);
         console.log(mi);
       });
 

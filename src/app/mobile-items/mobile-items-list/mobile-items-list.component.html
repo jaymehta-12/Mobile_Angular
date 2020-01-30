@@ -26,6 +26,7 @@
             <option value="name_desc">Name(H to L)</option>>
             <option value="price_desc">Price(H to L)</option>
         </select>
+        
     </div>
 
     
@@ -51,7 +52,7 @@
                         <td>{{mi.mobileName}}</td>
                         <td>{{ mi.mobilePrice }}</td>
                         <td>
-                            <!-- <b>{{mi.accessoryItems.length > 0 ? "Yes":"No"}}</b> -->
+                             <b>{{mi.accessoryItems?.length > 0 ? "Yes":"No"}}</b> 
 
                             <!-- <button type='button' class='btn btn-primary btn-sm' (click)="changess(mi.accessoryItemsId)">View Accessories </button> -->
 

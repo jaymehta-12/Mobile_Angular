@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MobileItems } from './mobile-model/mobile-items.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http } from '@angular/http';
-import { Observable , of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,8 @@ export class MobileItemsService {
       return this.httpClient.get<MobileItems[]>(newurl);
 
     } else {
-    const newurl = `${this.rootURL}/mobileitem/search?searchstring=${searchstring}`;
-    return this.httpClient.get<MobileItems[]>(newurl);
+      const newurl = `${this.rootURL}/mobileitem/search?searchstring=${searchstring}`;
+      return this.httpClient.get<MobileItems[]>(newurl);
     }
   }
 
@@ -49,6 +49,8 @@ export class MobileItemsService {
   }
 
   save(mobile: MobileItems): Observable<MobileItems> {
+
+    console.log(mobile.Image);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     mobile.mobileItemsId = 0;
     return this.httpClient.post<MobileItems>(this.rootURL + '/mobileitem', mobile, { headers }).pipe(
@@ -78,10 +80,11 @@ export class MobileItemsService {
 
   }
   private empty(): MobileItems {
-    return{
-      mobileItemsId : 0,
+    return {
+      mobileItemsId: 0,
       mobileName: null,
-      mobilePrice: null
+      mobilePrice: null,
+      Image: null
     };
   }
 
