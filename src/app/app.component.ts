@@ -4,9 +4,8 @@ import { MobileItems } from './mobile-items/mobile-model/mobile-items.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styles:[]
+  styles: []
 })
 export class AppComponent {
   title = 'client';
-  
 }

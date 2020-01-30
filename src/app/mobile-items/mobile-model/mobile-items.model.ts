@@ -4,5 +4,5 @@ export class MobileItems {
     mobileName: string;
     mobilePrice: number;
     accessoryItems?: any;
-    
+
 }

@@ -9,7 +9,6 @@ import { AccessoryItemsComponent } from './accessory-items/accessory-items.compo
 export class MobileItemsComponent implements OnInit {
 
   constructor() {
-    
    }
 
   ngOnInit() {

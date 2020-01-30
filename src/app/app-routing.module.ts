@@ -11,31 +11,25 @@ import { MobileEditComponent } from './mobile-items/mobile-edit/mobile-edit.comp
 
 const routes: Routes = [
   {
-    path:'mobile-items',component:MobileItemsComponent, children:[
+    path: 'mobile-items', component: MobileItemsComponent, children: [
 
       {
         path: 'warranty',
         component: WarrantyComponent,
-        
+
       },
       {
         path: 'companies',
         component: CompaniesComponent,
-        
+
       }
-    
+
     ]},
-    {path:'add-mobile',component:AddMobileComponent},
-    {path:'list-mobile',component:MobileItemsListComponent},
-    {path: 'acc-list/:id', component:AccessoryItemsListComponent},
-    {path:'add-mobile/:id/edit',component:AddMobileComponent},
-    {path:'add-mobile/:id/delete',component:AddMobileComponent}
-
-    // {path:'warranty',component:WarrantyComponent,outlet:'warranty'},
-    // {path:'companies-mobile',component:CompaniesComponent}
-
-
- 
+    {path: 'add-mobile', component: AddMobileComponent},
+    {path: 'list-mobile', component: MobileItemsListComponent},
+    {path: 'acc-list/:id', component: AccessoryItemsListComponent},
+    {path: 'add-mobile/:id/edit', component: AddMobileComponent},
+    {path: 'add-mobile/:id/delete', component: AddMobileComponent}
 ];
 
 @NgModule({
@@ -43,4 +37,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents= [MobileItemsComponent,AddMobileComponent,MobileItemsListComponent]
+export const routingComponents = [MobileItemsComponent, AddMobileComponent, MobileItemsListComponent];

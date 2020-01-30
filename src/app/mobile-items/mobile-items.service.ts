@@ -1,64 +1,51 @@
 import { Injectable } from '@angular/core';
 import { MobileItems } from './mobile-model/mobile-items.model';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http } from '@angular/http';
-import { Observable ,of} from 'rxjs';
+import { Observable , of} from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class MobileItemsService {
-  // formData:MobileItems;
   readonly rootURL = 'http://localhost:60474/api';
 
 
   constructor(private httpClient: HttpClient, private http: Http) { }
-  /*this.http.get(this.rootURL +'/MobileItem')
-.toPromise()
-.then(res => this.list = res as MobileItems[]);*/
-  //return this.httpClient.get<MobileItems[]>(this.rootURL + '/mobileitem');
 
   getMobileItems(): Observable<MobileItems[]> {
-    return this.httpClient.get<MobileItems[]>(this.rootURL + '/mobileitem')
+    return this.httpClient.get<MobileItems[]>(this.rootURL + '/mobileitem');
   }
 
   getMobileItemsbyId(id: number): Observable<MobileItems> {
-    if (id === 0){
+    if (id === 0) {
       return of(this.empty());
     }
-    return this.httpClient.get<MobileItems>(this.rootURL + '/mobileitem/' + id)
+    return this.httpClient.get<MobileItems>(this.rootURL + '/mobileitem/' + id);
 
   }
 
   getMobileItemsbySearch(searchstring: string): Observable<MobileItems[]> {
-    if(searchstring===null){
+    if (searchstring === null) {
       const newurl = `${this.rootURL}/mobileitem/search${searchstring}`;
       return this.httpClient.get<MobileItems[]>(newurl);
 
-    } else{
+    } else {
     const newurl = `${this.rootURL}/mobileitem/search?searchstring=${searchstring}`;
     return this.httpClient.get<MobileItems[]>(newurl);
     }
   }
 
-  getMobileItemsbySort(sortstring: any): Observable<MobileItems[]>{
+  getMobileItemsbySort(sortstring: any): Observable<MobileItems[]> {
 
     const newurl = `${this.rootURL}/mobileitem/sort?sortorder=${sortstring}`;
-    return this.httpClient.get<MobileItems[]>(newurl)
+    return this.httpClient.get<MobileItems[]>(newurl);
   }
-
-  
-
-
-  // getMobileItemsbySearch(searchstring:string,mobile:MobileItems):Observable<MobileItems>{
-  //   return this.httpClient.get<MobileItems>(this.rootURL+ '/mobileitem/search' + searchstring)
-  // }
-
   getAccItemsbyID(id: number): Observable<MobileItems> {
-    if (id === 0){
+    if (id === 0) {
       return of(this.empty());
     }
-    return this.httpClient.get<MobileItems>(this.rootURL + '/mobileitem/' + id)
+    return this.httpClient.get<MobileItems>(this.rootURL + '/mobileitem/' + id);
   }
 
   save(mobile: MobileItems): Observable<MobileItems> {
@@ -81,27 +68,22 @@ export class MobileItemsService {
     );
 
   }
-  deleteMobile(id:number):Observable<{}>{
+  deleteMobile(id: number): Observable<{}> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.delete<MobileItems>(this.rootURL +'/mobileitem/' + id, { headers })
+    return this.httpClient.delete<MobileItems>(this.rootURL + '/mobileitem/' + id, { headers })
       .pipe(
         tap(data => console.log('deleteProduct: ' + id))
-        
+
       );
 
   }
-  private empty(): MobileItems{
+  private empty(): MobileItems {
     return{
       mobileItemsId : 0,
       mobileName: null,
       mobilePrice: null
     };
   }
-
-  // private refresh(){
-  //   return of(this.getMobileItems());
-  // }
-
 
 
 }

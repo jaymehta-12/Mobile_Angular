@@ -5,7 +5,7 @@ import { MobileItemsService } from '../mobile-items.service';
 import { Router } from '@angular/router';
 
 import { Directive, HostListener } from '@angular/core';
-import { Route ,ActivatedRoute} from '@angular/router';
+import { Route , ActivatedRoute} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 @Directive({
   selector: '[appBlockCopyPaste]'
 })
+// tslint:disable-next-line:directive-class-suffix
 export class AddMobileComponent implements OnInit {
 
 
@@ -32,7 +33,7 @@ export class AddMobileComponent implements OnInit {
   get accessoryItems(): FormArray {
     return this.mobileaddForm.get('accessoryItems') as FormArray;
   }
-  constructor(private fm: FormBuilder, private mobileservice: MobileItemsService,private route: ActivatedRoute,private router: Router) { }
+  constructor(private fm: FormBuilder, private mobileservice: MobileItemsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.mobileaddForm = this.fm.group({
@@ -41,11 +42,6 @@ export class AddMobileComponent implements OnInit {
       accessoryItems: this.fm.array([this.addAdd()]),
     });
 
-    
-
-    // const id = +this.route.snapshot.paramMap.get('id');
-
-    // this.getMobileItemsbyId(id);
     this.sub = this.route.paramMap.subscribe(
       params => {
         const id = +params.get('id');
@@ -70,12 +66,9 @@ export class AddMobileComponent implements OnInit {
 
   numberOnly(event): boolean {
     console.log(event.keyCode);
-    // const charCode = (event.which) ? event.which : event.keyCode;
+
     const charCode = event.keyCode;
     if (charCode > 48 && charCode < 123) {
-      // if (charCode > 48 && charCode < 58) {
-      //   return true;
-      // }
       return true;
     }
     // else if(charCode>48 && charCode<58){
@@ -87,15 +80,6 @@ export class AddMobileComponent implements OnInit {
   addAcc(): void {
     this.accessoryItems.push(this.addAdd());
   }
-
-  // addAdd(): FormGroup{
-  //   return this.fm.group({
-  //     accessoryName:'',
-  //     accessoryPrice:''
-  // })
-  // }
-
-
   addAdd(): FormGroup {
     return this.fm.group({
       accessoryName: [''],
@@ -114,9 +98,6 @@ export class AddMobileComponent implements OnInit {
         next: (mobile: MobileItems) => this.display(mobile),
       });
   }
-
-  
-
   display(mobile: MobileItems): void {
     this.mobile = mobile;
     if (this.mobile.mobileItemsId === 0) {
@@ -129,15 +110,14 @@ export class AddMobileComponent implements OnInit {
       mobilePrice: this.mobile.mobilePrice
 
     });
-    // this.mobileaddForm.setControl('tags', this.fb.array(this.mobile.tags || []));
 
     this.mobile.accessoryItems.forEach(accessoryItems => {
       (this.mobileaddForm.controls.accessoryItems as FormArray).push(
         this.fm.group({
           accessoryItemsId: [accessoryItems.accessoryItemsId],
-          accessoryName:[accessoryItems.accessoryName],
-          accessoryPrice:[accessoryItems.accessoryPrice],
-          mobileItemsId:[accessoryItems.mobileItemsId],
+          accessoryName: [accessoryItems.accessoryName],
+          accessoryPrice: [accessoryItems.accessoryPrice],
+          mobileItemsId: [accessoryItems.mobileItemsId],
 
         })
       );
@@ -146,12 +126,12 @@ export class AddMobileComponent implements OnInit {
 
 
 
-  deleteMobile(): void{
+  deleteMobile(): void {
 
-    if(this.mobile.mobileItemsId === 0){
+    if (this.mobile.mobileItemsId === 0) {
         this.onSave();
     } else {
-    if(confirm(`Really you wanna delete this item: ${this.mobile.mobileName}?`)){
+    if (confirm(`Really you wanna delete this item: ${this.mobile.mobileName}?`)) {
       this.mobileservice.deleteMobile(this.mobile.mobileItemsId).subscribe({
         next: () => this.onSave()
       });
@@ -159,7 +139,7 @@ export class AddMobileComponent implements OnInit {
   }
 
   }
-  onSave(): void{
+  onSave(): void {
     this.router.navigate(['/list-mobile']);
   }
 
@@ -168,16 +148,12 @@ export class AddMobileComponent implements OnInit {
       const m = { ...this.mobile, ...this.mobileaddForm.value};
       if (m.mobileItemsId === 0) {
       this.mobileservice.save(this.mobileaddForm.value).subscribe();
-      } else{
+      } else {
         const id = +this.route.snapshot.paramMap.get('id');
         this.mobileservice.update(id, m).subscribe();
       }
     } else {
       this.errorMessage = 'Please correct the validation errors.';
     }
-
-    // if (this.mobileaddForm.valid) {
-    //   this.mobileservice.save(this.mobileaddForm.value).subscribe()
-    // }
   }
 }

@@ -9,13 +9,12 @@ import { MobileItemsService } from '../mobile-items.service';
   styleUrls: ['./mobile-edit.component.css']
 })
 export class MobileEditComponent implements OnInit {
- 
- 
+
   mobileaddForm: FormGroup;
 
   mobile: MobileItems;
   MobileItems = new MobileItems();
-  errorMessage:string;
+  errorMessage: string;
   pageTitle = 'Item Edit';
 
 

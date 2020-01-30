@@ -26,6 +26,7 @@ export class MobileItemsListComponent implements OnInit {
     this.getMobileItems();
     this.searchForm = this.fm.group({
       searchstring: ['']
+    // tslint:disable-next-line:semicolon
     })
     // this.getMobileItemsbySearch();
 
@@ -38,34 +39,16 @@ export class MobileItemsListComponent implements OnInit {
       console.log(mi);
     });
   }
-  // getAccItemsbyID():void{
-
-  //   this.mobileservice.getAccItemsbyID().subscribe(mi => {
-  //     this.accitem = mi;
-  //     console.log(mi);
-
-
-  //   });
-
-  // }
-
-  // changes(id: number): void {
-  //   debugger;
-  //   this.router.navigate(['acc-list', id]);
-  // }
 
   changes(value: any, id: number) {
 
     if (!isNullOrUndefined(id) && value === 'view') {
       this.router.navigate(['acc-list', id]);
-    }
-    else if (value === 'add') {
+    } else if (value === 'add') {
       this.router.navigate(['add-mobile']);
-    }
-    else if (value === 'edit') {
+    } else if (value === 'edit') {
       this.router.navigate(['add-mobile', id, 'edit']);
-    }
-    else {
+    } else {
       this.router.navigate(['add-mobile', id, 'delete']);
     }
   }
@@ -80,9 +63,7 @@ export class MobileItemsListComponent implements OnInit {
 
       });
 
-    } else  {
-
-
+    } else {
     }
 
   }
@@ -96,7 +77,7 @@ export class MobileItemsListComponent implements OnInit {
       });
 
 
-    } else{
+    } else {
 
 
     }
